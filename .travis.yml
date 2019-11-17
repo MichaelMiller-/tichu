@@ -11,28 +11,30 @@ matrix:
         - g++-8
         sources:
         - ubuntu-toolchain-r-test
+  # - os: linux
+  #   env: COMPILER=g++-9
+  #   addons:
+  #     apt:
+  #       packages:
+  #       - g++-9
+  #       sources:
+  #       - ubuntu-toolchain-r-test
   - os: linux
-    env: COMPILER=g++-9
+    env: COMPILER=clang++-6.0
     addons:
       apt:
         packages:
-        - g++-9
+        - clang-6.0
         sources:
         - ubuntu-toolchain-r-test
-  - os: linux
-    env: COMPILER=clang
-    addons:
-      apt:
-        packages:
-        - clang
-        sources:
-        - ubuntu-toolchain-r-test
+        - llvm-toolchain-bionic-6.0
 
 before_install:
 - export CXX="${COMPILER}"
 - sudo apt-get -qq update
 - sudo apt-get install -y libboost-dev
 install: 
+  - make get-deps
 
 before_script:
 - uname -a
