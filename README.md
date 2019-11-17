@@ -1,2 +1,3 @@
 # tichu
-Tichu card game logic implemented in C++
+
+[Tichu](https://en.wikipedia.org/wiki/Tichu) game logic implemented in C++.
