@@ -43,6 +43,9 @@ namespace tichu
 	constexpr card_t::value_t A{ 14 };
 
 	constexpr card_t mahjong{ Mahjong, color_t::special };
+	constexpr card_t dragon{ Dragon, color_t::special };
+	constexpr card_t phonix{ Phonix, color_t::special };
+	constexpr card_t dog{ Dog, color_t::special };
 
 	using deck_t   = std::array<card_t, 56>;
    using grand_tichu_t = std::array<card_t, 8>;
@@ -50,6 +53,7 @@ namespace tichu
    using stash_t  = std::vector<card_t>;
 
 	template <typename Stash>
+	//! \todo predicate
 	void sort_cards(Stash && stash) noexcept {
 		std::sort(std::begin(stash), std::end(stash), less);
 	}
