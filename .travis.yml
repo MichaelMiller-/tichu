@@ -1,0 +1,50 @@
+language: cpp
+dist: bionic
+
+matrix:
+  include:
+  - os: linux
+    env: COMPILER=g++-8
+    addons:
+      apt:
+        packages:
+        - g++-8
+        sources:
+        - ubuntu-toolchain-r-test
+  - os: linux
+    env: COMPILER=g++-9
+    addons:
+      apt:
+        packages:
+        - g++-9
+        sources:
+        - ubuntu-toolchain-r-test
+  - os: linux
+    env: COMPILER=clang
+    addons:
+      apt:
+        packages:
+        - clang
+        sources:
+        - ubuntu-toolchain-r-test
+
+before_install:
+- export CXX="${COMPILER}"
+- sudo apt-get -qq update
+- sudo apt-get install -y libboost-dev
+install: 
+
+before_script:
+- uname -a
+script:
+- mkdir -p _build && cd _build
+- cmake .. 
+- cmake --build . -- -j4 VERBOSE=1
+- ctest -j2
+
+# after_script:
+# after_success:
+# before_deploy:
+# deploy:
+# after_deploy: 
+
