@@ -8,7 +8,15 @@ function(test test)
 
     target_include_directories(test.${tmp} PRIVATE "${CMAKE_SOURCE_DIR}/deps/range-v3/include")
 
-    add_compile_options(-Wall -Wextra -Wpedantic -Wconversion)
+    if (MSVC_VERSION GREATER_EQUAL "1900")
+
+        add_compile_options("/permissive-")
+        add_compile_options(/W4) ## /WX)
+    endif()
+
+    if (CMAKE_COMPILER_IS_GNUCXX)
+        add_compile_options(-Wall -Wextra -Wpedantic -Wconversion)
+    endif()
 
     target_link_libraries(test.${tmp} PUBLIC tichu)
 
